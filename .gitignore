@@ -10,3 +10,7 @@ Thumbs.db
 
 # Editor
 .vscode/settings.json.local
+
+# Python
+__pycache__/
+*.pyc
