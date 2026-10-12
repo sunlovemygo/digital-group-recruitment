@@ -1,6 +1,6 @@
-# 集协数字组招新 · Attention IP 入门项目
+# Attention 加速器 IP 设计与验证
 
-这是一个面向招新的轻量级数字 IC 入门项目：用 Verilog 实现一个单头 Attention 加速器 IP，并通过仿真验证。
+本项目是我在数字 IC / Verilog 学习过程中的练习作品：用 Verilog 实现一个单头 Attention 加速器 IP，并通过 Icarus Verilog 仿真验证。
 
 ## 项目规模
 
@@ -23,7 +23,7 @@
 
 ```
 rtl/          # 设计代码
-  attention_ip.v        # 你的主实现（骨架版已填完）
+  attention_ip.v        # 主实现（骨架版已填完）
   attention_ip_ref.v    # 参考实现
   attention_ip_online_softmax.v  # Online Softmax 改进版
   ...
@@ -72,19 +72,19 @@ ACC = [87,77,33,63]
 
 最终输出 `O = [3, 2, 1, 2]`。
 
-## 招新说明
+## 学习收获
 
-如果你能看到这里，说明你已经具备了：
+通过这个项目，我对以下内容有了更深的理解：
 
-- 基础的数字电路知识
-- 一定的 Verilog 语法基础
-- 对状态机、定点数、存储器组织有概念
+- 如何用 Verilog 描述状态机和数据通路
+- 8-bit 有符号定点数与 4.4 定点的缩放关系
+- Softmax 的数值稳定性：先求 `xmax` 再做 `exp`
+- 阻塞赋值 `=` 与非阻塞赋值 `<=` 的适用场景
+- 如何用 Python 黄金模型生成测试向量并比对 RTL 输出
 
-加入数字组后，你会进一步学习：
+## 后续可扩展方向
 
-- 更复杂的流水线设计
-- FPGA 上板验证
-- 综合、时序分析、面积优化
-- SystemVerilog / UVM 验证方法学
-
-欢迎提交 Issue 或 PR！
+- 合并 EXP/UPDATE 状态，进一步缩短单任务周期
+- 用 PWL（分段线性近似）替代 LUT，提高 exp 精度
+- 加入因果 Mask（Causal Mask）支持自回归 Attention
+- 把序列长度 `S` 参数化，支持更大规模
